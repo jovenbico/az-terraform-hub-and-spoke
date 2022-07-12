@@ -21,22 +21,33 @@ $ az version
 ```
 
 3. Create Azure cloud sanbox
-```
-## Update resource group (rg-name) local variable
 
+Update resource group (rg-name) local variable in `main.tf`
+```
 locals {
   rg-name        = "1-xyz-playground-sandbox"
 }
+```
+
+Authenticate Azure cli
+```
+$ az login --use-device-code
+To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code XYZ to authenticate.
 ```
 
 ## Initialize terraform code
 ```
 $ terraform init
 $ terraform fmt
-$ terraform plan
+```
+
+## Create terraform workspace
+```
+$ terraform workspace new 1-xyz-playground-sandbox
 ```
 
 ## Deploy terraform code
 ```
-$ terraform apply --auto-approve
+$ terraform plan
+$ terraform apply -auto-approve -parallelism=3
 ```
